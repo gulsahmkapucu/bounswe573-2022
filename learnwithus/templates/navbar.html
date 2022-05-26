@@ -1,0 +1,27 @@
+
+<html>
+    <head>
+      <h1 style="font-family:verdana">LearnWithUs</h1>
+      <hr>
+    </head>
+<div>
+  <h2>
+    
+
+    <span style="float:right">
+      {% if user.is_authenticated %}
+          {% url 'profile' as profile_url %}
+          <span style="font-family:verdana"> Welcome {% if request.path == profile_url %}{{user.username}}{% else %}<a href="{{ profile_url }}">{{user.username}}</a>{% endif %} !</span>
+          <span style="font-family:verdana"><a href="{% url 'logout' %}">Logout</span>
+      {% else  %}
+          <span style="font-family:verdana"><a style="font-family:verdana" href="{% url 'accounts/login' %}">Login     |     </span>
+          <span><a style="font-family:verdana"href="{% url 'accounts/register' %}">Register</a></span>
+      {% endif %}
+    </span>
+
+    <span style="font-family:verdana"><a style="font-family:verdana" href="{% url 'index' %}">Home      |     </a></span>
+    <span style="font-family:verdana"><a style="font-family:verdana" href="{% url 'courses' %}">Courses</a></span>
+  </h2>
+</div>
+<hr>
+  </html>

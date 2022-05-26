@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block title%} LearnWithUs {% endblock%}
+
+{% block content %}
+<!-- <h1>LearnWithUs</h1> -->
+
+<body>
+<div class="container text-white">
+    <form action="{% url 'searchbar' %}" method ="get">
+        {% csrf_token %}
+        <input type="text" name="q" placeholder="Search Courses Here">
+        <button type="submit">Search</button>
+    </form>
+</div>
+<div>
+{%for course in courses%}
+<div>
+    <h3 style="font-family:verdana">{{course.title}}</h3>
+    <p style="font-family:verdana">{{course.description}}</p>
+    <a style="font-family:verdana" href="{% url 'coursedetail' pk=course.cid %}">Join to course</a>
+</div>
+{% endfor %}
+</div>
+
+</body>
+
+
+{% endblock %}
+

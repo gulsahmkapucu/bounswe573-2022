@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block title%} Courses {% endblock%}
+
+{% block content %}
+<h2 style="font-family:verdana"> Courses</h2>
+<hr>
+
+<div>
+{% for x in obj %}   
+<a style="font-family:verdana" href="{% url 'coursedetail' pk=x.pk %}"><h3>{{x.title}}</h3></a><hr>
+{% endfor %}
+</div>
+    
+
+{% endblock %}
