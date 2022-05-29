@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block title%} Profile {% endblock%}
+
+{% block content %}
+<h2 style="font-family:verdana">
+    {{ user.username }}'s profile
+</h2>
+<hr>
+<h2 style="font-family:verdana">My Course History</h2>
+<br>
+
+{%for course in joinedcourses%}
+    <a style="font-family:verdana" href="{% url 'coursedetail' pk=course.courseid %}">{{course.courseName}}</a><hr>
+    <br>
+{% endfor %}
+
+{% endblock %}

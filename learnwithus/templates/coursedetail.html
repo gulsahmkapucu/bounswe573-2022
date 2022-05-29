@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+
+
+{% block title%} Courses {% endblock%}
+{% block content %}
+<html>
+<body>
+<h1 style="font-family:verdana">Course Detail</h1>
+<hr>
+
+<div>
+<h3 style="font-family:verdana">{{ course.title }}</h3>
+<p style="font-family:verdana">{{ course.description }}</p>
+</div>
+<div style="align-items:center;">
+<iframe width="600" height="400" src="{{ course.videourl }}" allowfullscreen="true"></iframe>
+</div>
+
+
+<h2 style="font-family:verdana"> Your Questions </h2>
+
+      {% if user.is_authenticated %}
+       <form action="" method="POST" id="main_form" class="comment_form">
+          <div>
+              <label for="comment" style="font-family:verdana">Questions</label>
+             {{ comment_form.content }} {% csrf_token %} <input type="submit" value="Post"></div>
+          </div>
+       </form>
+       {% else %} <h2 style="font-family:verdana">You need to Login to ask questions</h2> 
+       {% endif %}
+ 
+       {% for comment in comments %}
+          {% if comment.is_parent %}
+          <h3> <b>{{ comment.author }} : </b> {{ comment.content }}</h3> 
+          &nbsp; &nbsp; &nbsp;
+          <form action="" method="POST" id="main_form" class="comment_form">
+             <div>
+                 &nbsp; &nbsp; &nbsp;<label for="comment">Reply here</label>
+                &nbsp; &nbsp; &nbsp;<input type="text" name="content"> <input type="hidden" value="{{ comment.pk }}" name="parent"> {% csrf_token %} <input type="submit" value="Post"></div>
+             </div>
+          </form>
+          {% endif %} 
+          
+          {% for replies in comment.children %}
+             <h3>&nbsp; &nbsp; &nbsp; <b>{{ comment.author }} : </b> {{ replies.content }}</h3>
+          {% endfor %}
+       {% endfor %}
+</body>
+</html>
+{% endblock %}
