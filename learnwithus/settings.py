@@ -44,6 +44,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['*',
 'learnwithus-app.heroku.com',
+'https://django-postgres.azurewebsites.net',
 'learnwithus-dev3.us-west-2.elasticbeanstalk.com'
 'localhost',
 '127.0.0.1',]
